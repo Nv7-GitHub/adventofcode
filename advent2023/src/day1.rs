@@ -35,36 +35,19 @@ pub fn day1() {
         sum += nums[nums.len() - 1];*/
 
         // Part 2
-        let mut start = 0;
+        let mut nums = Vec::new();
         let mut i = 0;
-        'start: while i < chk.len() {
+        while i < chk.len() {
             for digit in DIGITS {
                 if i + digit.0.len() <= chk.len()
                     && chk.chars().skip(i).collect::<String>().starts_with(digit.0)
                 {
-                    start = digit.1;
-                    break 'start;
+                    nums.push(digit.1);
                 }
             }
             i += 1;
         }
-
-        let mut end = 0;
-        let mut i = chk.len() - 1;
-        'end: while i > 0 {
-            for digit in DIGITS {
-                if i + digit.0.len() <= chk.len()
-                    && chk.chars().skip(i).collect::<String>().starts_with(digit.0)
-                {
-                    end = digit.1;
-                    break 'end;
-                }
-            }
-            i -= 1;
-        }
-
-        println!("{}{}", start, end);
-        sum += start * 10 + end;
+        sum += nums[0] * 10 + nums[nums.len() - 1];
     }
 
     println!("Result 1: {}", sum);
